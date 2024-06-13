@@ -6,6 +6,8 @@
 Welcome to SOTA tool's documentation!
 =====================================
 
+this is a test
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:

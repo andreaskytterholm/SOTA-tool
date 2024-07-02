@@ -4,8 +4,8 @@
 
 
 .wy-side-scroll, .wy-side-nav-search,.wy-nav-side {
-    background: #ffff;
-    color: #01404e;
+    background: #758f9b;
+    color: #ffff;
 }
 
 .wy-body-for-nav, .caption-text, .head {
@@ -18,7 +18,63 @@
 
 .wy-menu-vertical .toctree-l1 .current {
     background: #ffff;
+    color: #da1710;
+}
+
+.toctree-l2 {
+    background: #ffff;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*body {*/
+/*    background-image: url("background.jpg") !important;*/
+/*}*/
+
+
+/*
+.wy-nav-content {
+    max-width: 1600px !important;
+}
+
+
+.wy-side-scroll, .wy-side-nav-search,.wy-nav-side {
+    background: #01404e;
     color: #01404e;
+}
+
+.wy-body-for-nav, .caption-text, .head {
+    color: #01404e;
+}
+
+
+.wy-nav-side .caption-text {
+    color: #ffff;
+}
+
+.wy-menu-vertical .toctree-l1 .current {
+    background: #ffff;
+    color: #01404e;
+}
+
+.toctree-l1 {
+    color: #ffff
 }
 
 .toctree-l2 {

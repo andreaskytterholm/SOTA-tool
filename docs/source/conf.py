@@ -6,6 +6,8 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+import sys; sys.setrecursionlimit(3000)
+
 project = 'SOTA tool'
 copyright = '2024, Andrea Skytterholm and Nektaria Kaloudi'
 author = 'Andrea Skytterholm and Nektaria Kaloudi'

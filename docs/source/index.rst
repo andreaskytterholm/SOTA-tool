@@ -18,8 +18,9 @@ Welcome to the knowledgebase repository
    :maxdepth: 1
    :caption: Contents:
 
-   content/manufacturer
-   content/operator
+   content/manufacturers/manufacturer
+   content/operators/operator
+   content/all_content
 
 ..
    Indices and tables

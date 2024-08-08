@@ -11,4 +11,5 @@ This page displays the regulations relevant for manufacturers
 
    ivdr
    mdr
+   consolidated_appropriations
    ../../general/regulations/gdpr

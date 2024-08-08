@@ -10,7 +10,6 @@ This is a testttt
 
    standards/operator_standards
    regulations/operator_regulations
-   regulations/cybersecurity_enhancement
    guidelines/operator_guidelines
    best_practices/operator_best_practices
 

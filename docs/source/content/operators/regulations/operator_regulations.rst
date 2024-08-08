@@ -9,3 +9,4 @@ This page displays regulations for operators.¨
    :caption: Contents:
 
    ../../general/regulations/gdpr
+   cybersecurity_enhancement

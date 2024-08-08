@@ -10,5 +10,6 @@ This page lists the documents relevant for manufacturers
 
    standards/manufacturer_standards
    regulations/manufacturer_regulations
+   regulations/consolidated_appropriations
    guidelines/manufacturer_guidelines
    best_practices/manufacturer_best_practice

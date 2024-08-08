@@ -1,7 +1,7 @@
 Manufacturers 
 ==============
 
-This page lists the documents relevant for manufacturers
+This page lists the documents relevant for manufacturers.
 
 
 .. toctree::

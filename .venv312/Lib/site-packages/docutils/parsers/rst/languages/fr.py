@@ -1,4 +1,4 @@
-# $Id: fr.py 9383 2023-05-11 15:01:20Z milde $
+# $Id: fr.py 9417 2023-06-27 20:04:54Z milde $
 # Authors: David Goodger <goodger@python.org>; William Dode
 # Copyright: This module has been placed in the public domain.
 
@@ -25,7 +25,8 @@ directives = {
       'note': 'note',
       'astuce': 'tip',
       'avertissement': 'warning',
-      'admonition': 'admonition',  # sic! Not used in this sense in rST.
+      'annonce': 'admonition',
+      'admonition': 'admonition',  # sic! kept for backwards compatibiltity
       # suggestions: annonce, avis, indication, remarque, renseignement
       # see also https://sourceforge.net/p/docutils/bugs/453/
       'encadré': 'sidebar',

@@ -1,4 +1,4 @@
-# $Id: nl.py 9116 2022-07-28 17:06:51Z milde $
+# $Id: nl.py 9417 2023-06-27 20:04:54Z milde $
 # Author: Martijn Pieters <mjpieters@users.sourceforge.net>
 # Copyright: This module has been placed in the public domain.
 
@@ -27,7 +27,8 @@ directives = {
       'opmerking': 'note',
       'tip': 'tip',
       'waarschuwing': 'warning',
-      'aanmaning': 'admonition',  # sic! Not used in this sense in rST.
+      'advies': 'admonition',
+      'aanmaning': 'admonition',  # sic! kept for backwards compatibiltity
       'katern': 'sidebar',
       'onderwerp': 'topic',
       'lijn-blok': 'line-block',

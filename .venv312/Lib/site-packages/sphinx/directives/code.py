@@ -7,7 +7,6 @@ from typing import TYPE_CHECKING, Any, ClassVar
 
 from docutils import nodes
 from docutils.parsers.rst import directives
-from docutils.statemachine import StringList
 
 from sphinx import addnodes
 from sphinx.directives import optional_int
@@ -75,15 +74,13 @@ def container_wrapper(
 ) -> nodes.container:
     container_node = nodes.container('', literal_block=True,
                                      classes=['literal-block-wrapper'])
-    parsed = nodes.Element()
-    directive.state.nested_parse(StringList([caption], source=''),
-                                 directive.content_offset, parsed)
-    if isinstance(parsed[0], nodes.system_message):
-        msg = __('Invalid caption: %s' % parsed[0].astext())
+    parsed = directive.parse_text_to_nodes(caption, offset=directive.content_offset)
+    node = parsed[0]
+    if isinstance(node, nodes.system_message):
+        msg = __('Invalid caption: %s') % node.astext()
         raise ValueError(msg)
-    if isinstance(parsed[0], nodes.Element):
-        caption_node = nodes.caption(parsed[0].rawsource, '',
-                                     *parsed[0].children)
+    if isinstance(node, nodes.Element):
+        caption_node = nodes.caption(node.rawsource, '', *node.children)
         caption_node.source = literal_node.source
         caption_node.line = literal_node.line
         container_node += caption_node
@@ -124,8 +121,8 @@ class CodeBlock(SphinxDirective):
                 nlines = len(self.content)
                 hl_lines = parselinenos(linespec, nlines)
                 if any(i >= nlines for i in hl_lines):
-                    logger.warning(__('line number spec is out of range(1-%d): %r') %
-                                   (nlines, self.options['emphasize-lines']),
+                    logger.warning(__('line number spec is out of range(1-%d): %r'),
+                                   nlines, self.options['emphasize-lines'],
                                    location=location)
 
                 hl_lines = [x + 1 for x in hl_lines if x < nlines]
@@ -274,8 +271,8 @@ class LiteralIncludeReader:
         if linespec:
             linelist = parselinenos(linespec, len(lines))
             if any(i >= len(lines) for i in linelist):
-                logger.warning(__('line number spec is out of range(1-%d): %r') %
-                               (len(lines), linespec), location=location)
+                logger.warning(__('line number spec is out of range(1-%d): %r'),
+                               len(lines), linespec, location=location)
 
             if 'lineno-match' in self.options:
                 # make sure the line list is not "disjoint".
@@ -450,8 +447,8 @@ class LiteralInclude(SphinxDirective):
             if 'emphasize-lines' in self.options:
                 hl_lines = parselinenos(self.options['emphasize-lines'], lines)
                 if any(i >= lines for i in hl_lines):
-                    logger.warning(__('line number spec is out of range(1-%d): %r') %
-                                   (lines, self.options['emphasize-lines']),
+                    logger.warning(__('line number spec is out of range(1-%d): %r'),
+                                   lines, self.options['emphasize-lines'],
                                    location=location)
                 extra_args['hl_lines'] = [x + 1 for x in hl_lines if x < lines]
             extra_args['linenostart'] = reader.lineno_start

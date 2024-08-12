@@ -19,4 +19,4 @@ Medical Device Coordination Group (MDCG) issued the Guidance on Cybersecurity fo
 
 **Related documents:**
 
-:doc:`../regulations/mdr`
+:doc:`../../manufacturers/regulations/mdr`

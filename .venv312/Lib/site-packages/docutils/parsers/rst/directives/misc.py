@@ -1,4 +1,4 @@
-# $Id: misc.py 9358 2023-04-19 23:31:13Z milde $
+# $Id: misc.py 9492 2023-11-29 16:58:13Z milde $
 # Authors: David Goodger <goodger@python.org>; Dethe Elza
 # Copyright: This module has been placed in the public domain.
 
@@ -17,6 +17,20 @@ from docutils.parsers.rst import Directive, convert_directive_function
 from docutils.parsers.rst import directives, roles, states
 from docutils.parsers.rst.directives.body import CodeBlock, NumberLines
 from docutils.transforms import misc
+
+
+def adapt_path(path, source='', root_prefix='/'):
+    # Adapt path to files to include or embed.
+    # `root_prefix` is prepended to absolute paths (cf. root_prefix setting),
+    # `source` is the `current_source` of the including directive (which may
+    # be a file included by the main document).
+    if path.startswith('/'):
+        base = Path(root_prefix)
+        path = path[1:]
+    else:
+        base = Path(source).parent
+    # pepend "base" and convert to relative path for shorter system messages
+    return utils.relative_path(None, base/path)
 
 
 class Include(Directive):
@@ -58,25 +72,24 @@ class Include(Directive):
         Depending on the options, the file (or a clipping) is
         converted to nodes and returned or inserted into the input stream.
         """
-        if not self.state.document.settings.file_insertion_enabled:
+        settings = self.state.document.settings
+        if not settings.file_insertion_enabled:
             raise self.warning('"%s" directive disabled.' % self.name)
+        tab_width = self.options.get('tab-width', settings.tab_width)
         current_source = self.state.document.current_source
         path = directives.path(self.arguments[0])
         if path.startswith('<') and path.endswith('>'):
-            _base = self.standard_include_path
-            path = path[1:-1]
+            path = '/' + path[1:-1]
+            root_prefix = self.standard_include_path
         else:
-            _base = Path(current_source).parent
-        path = utils.relative_path(None, _base/path)
-        encoding = self.options.get(
-            'encoding', self.state.document.settings.input_encoding)
-        e_handler = self.state.document.settings.input_encoding_error_handler
-        tab_width = self.options.get(
-            'tab-width', self.state.document.settings.tab_width)
+            root_prefix = settings.root_prefix
+        path = adapt_path(path, current_source, root_prefix)
+        encoding = self.options.get('encoding', settings.input_encoding)
+        error_handler = settings.input_encoding_error_handler
         try:
             include_file = io.FileInput(source_path=path,
                                         encoding=encoding,
-                                        error_handler=e_handler)
+                                        error_handler=error_handler)
         except UnicodeEncodeError:
             raise self.severe(f'Problems with "{self.name}" directive path:\n'
                               f'Cannot encode input file path "{path}" '
@@ -85,7 +98,7 @@ class Include(Directive):
             raise self.severe(f'Problems with "{self.name}" directive '
                               f'path:\n{io.error_string(error)}.')
         else:
-            self.state.document.settings.record_dependencies.add(path)
+            settings.record_dependencies.add(path)
 
         # Get to-be-included content
         startline = self.options.get('start-line', None)
@@ -121,7 +134,7 @@ class Include(Directive):
         include_lines = statemachine.string2lines(rawtext, tab_width,
                                                   convert_whitespace=True)
         for i, line in enumerate(include_lines):
-            if len(line) > self.state.document.settings.line_length_limit:
+            if len(line) > settings.line_length_limit:
                 raise self.warning('"%s": line %d exceeds the'
                                    ' line-length-limit.' % (path, i+1))
 
@@ -187,7 +200,7 @@ class Include(Directive):
 
         if 'parser' in self.options:
             # parse into a dummy document and return created nodes
-            document = utils.new_document(path, self.state.document.settings)
+            document = utils.new_document(path, settings)
             document.include_log = include_log + [(path, clip_options)]
             parser = self.options['parser']()
             parser.parse('\n'.join(include_lines), document)
@@ -227,15 +240,14 @@ class Raw(Directive):
     has_content = True
 
     def run(self):
-        if (not self.state.document.settings.raw_enabled
-            or (not self.state.document.settings.file_insertion_enabled
-                and ('file' in self.options
-                     or 'url' in self.options))):
+        settings = self.state.document.settings
+        if (not settings.raw_enabled
+            or (not settings.file_insertion_enabled
+                and ('file' in self.options or 'url' in self.options))):
             raise self.warning('"%s" directive disabled.' % self.name)
         attributes = {'format': ' '.join(self.arguments[0].lower().split())}
-        encoding = self.options.get(
-            'encoding', self.state.document.settings.input_encoding)
-        e_handler = self.state.document.settings.input_encoding_error_handler
+        encoding = self.options.get('encoding', settings.input_encoding)
+        error_handler = settings.input_encoding_error_handler
         if self.content:
             if 'file' in self.options or 'url' in self.options:
                 raise self.error(
@@ -247,20 +259,20 @@ class Raw(Directive):
                 raise self.error(
                     'The "file" and "url" options may not be simultaneously '
                     'specified for the "%s" directive.' % self.name)
-            path = self.options['file']
-            _base = Path(self.state.document.current_source).parent
-            path = utils.relative_path(None, _base/path)
+            path = adapt_path(self.options['file'],
+                              self.state.document.current_source,
+                              settings.root_prefix)
             try:
                 raw_file = io.FileInput(source_path=path,
                                         encoding=encoding,
-                                        error_handler=e_handler)
+                                        error_handler=error_handler)
             except OSError as error:
                 raise self.severe(f'Problems with "{self.name}" directive '
                                   f'path:\n{io.error_string(error)}.')
             else:
                 # TODO: currently, raw input files are recorded as
                 # dependencies even if not used for the chosen output format.
-                self.state.document.settings.record_dependencies.add(path)
+                settings.record_dependencies.add(path)
             try:
                 text = raw_file.read()
             except UnicodeError as error:
@@ -277,7 +289,7 @@ class Raw(Directive):
                                   f'{io.error_string(error)}.')
             raw_file = io.StringInput(source=raw_text, source_path=source,
                                       encoding=encoding,
-                                      error_handler=e_handler)
+                                      error_handler=error_handler)
             try:
                 text = raw_file.read()
             except UnicodeError as error:

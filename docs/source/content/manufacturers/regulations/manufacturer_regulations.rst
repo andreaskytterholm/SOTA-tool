@@ -1,15 +1,6 @@
 Regulations 
 ============
 
-
-This page displays the regulations relevant for manufacturers
-
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Contents:
-
-   ivdr
-   mdr
-   consolidated_appropriations
-   ../../general/regulations/gdpr
+* :doc:`mdr`
+* :doc:`ivdr`
+* :doc:`consolidated_appropriations`

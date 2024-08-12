@@ -1,4 +1,4 @@
-# $Id: io.py 9369 2023-05-02 23:04:27Z milde $
+# $Id: io.py 9427 2023-07-07 06:50:09Z milde $
 # Author: David Goodger <goodger@python.org>
 # Copyright: This module has been placed in the public domain.
 
@@ -32,14 +32,6 @@ try:
         _locale_encoding = (locale.getlocale()[1]
                             or locale.getdefaultlocale()[1])
         _locale_encoding = _locale_encoding.lower()
-except ValueError as error:  # OS X may set UTF-8 without language code
-    # See https://bugs.python.org/issue18378 fixed in 3.8
-    # and https://sourceforge.net/p/docutils/bugs/298/.
-    # Drop the special case after requiring Python >= 3.8
-    if "unknown locale: UTF-8" in error.args:
-        _locale_encoding = "utf-8"
-    else:
-        _locale_encoding = None
 except:  # noqa  any other problems determining the locale -> use None
     _locale_encoding = None
 try:
@@ -125,24 +117,15 @@ class Input(TransformSpec):
         Return Unicode `str` instances unchanged (nothing to decode).
 
         If `self.encoding` is None, determine encoding from data
-        or try UTF-8, locale encoding, and (as last ressort) 'latin-1'.
-        The client application should call ``locale.setlocale`` at the
+        or try UTF-8 and the locale's preferred encoding.
+        The client application should call ``locale.setlocale()`` at the
         beginning of processing::
 
             locale.setlocale(locale.LC_ALL, '')
 
         Raise UnicodeError if unsuccessful.
 
-        Provisional:
-          - Raise UnicodeError (instead of falling back to the locale
-            encoding) if decoding the source with the default encoding (UTF-8)
-            fails and Python is started in `UTF-8 mode`.
-
-            Raise UnicodeError (instead of falling back to "latin1") if both,
-            default and locale encoding, fail.
-
-          - Only remove BOM (U+FEFF ZWNBSP at start of data),
-            no other ZWNBSPs.
+        Provisional: encoding detection will be removed in Docutils 1.0.
         """
         if self.encoding and self.encoding.lower() == 'unicode':
             assert isinstance(data, str), ('input encoding is "unicode" '
@@ -157,29 +140,22 @@ class Input(TransformSpec):
         else:
             data_encoding = self.determine_encoding_from_data(data)
             if data_encoding:
-                # If the data declares its encoding (explicitly or via a BOM),
-                # we believe it.
+                # `data` declares its encoding with  "magic comment" or BOM,
                 encoding_candidates = [data_encoding]
             else:
-                # Apply heuristics only if no encoding is explicitly given and
-                # no BOM found.  Start with UTF-8, because that only matches
+                # Apply heuristics if the encoding is not specified.
+                # Start with UTF-8, because that only matches
                 # data that *IS* UTF-8:
                 encoding_candidates = ['utf-8']
-                # TODO: use `locale.getpreferredlocale(do_setlocale=True)`
-                # to respect UTF-8 mode (API change).
-                # (Check if it is a valid encoding and not UTF-8)
-                if _locale_encoding and _locale_encoding != 'utf-8':
-                    encoding_candidates.append(_locale_encoding)
-                # TODO: don't fall back to 'latin-1' (API change).
-                encoding_candidates.append('latin-1')
+                # If UTF-8 fails, fall back to the locale's preferred encoding:
+                fallback = locale.getpreferredencoding(do_setlocale=False)
+                if fallback and fallback.lower() != 'utf-8':
+                    encoding_candidates.append(fallback)
         for enc in encoding_candidates:
             try:
                 decoded = str(data, enc, self.error_handler)
                 self.successful_encoding = enc
-                # Return decoded, removing BOM and other ZWNBSPs.
-                # TODO: only remove BOM (ZWNBSP at start of data)
-                #       and only if 'self.encoding' is None. (API change)
-                return decoded.replace('\ufeff', '')
+                return decoded
             except (UnicodeError, LookupError) as err:
                 # keep exception instance for use outside of the "for" loop.
                 error = err
@@ -191,9 +167,12 @@ class Input(TransformSpec):
     coding_slug = re.compile(br"coding[:=]\s*([-\w.]+)")
     """Encoding declaration pattern."""
 
-    byte_order_marks = ((codecs.BOM_UTF8, 'utf-8'),
-                        (codecs.BOM_UTF16_BE, 'utf-16-be'),
-                        (codecs.BOM_UTF16_LE, 'utf-16-le'),)
+    byte_order_marks = ((codecs.BOM_UTF32_BE, 'utf-32'),
+                        (codecs.BOM_UTF32_LE, 'utf-32'),
+                        (codecs.BOM_UTF8, 'utf-8-sig'),
+                        (codecs.BOM_UTF16_BE, 'utf-16'),
+                        (codecs.BOM_UTF16_LE, 'utf-16'),
+                        )
     """Sequence of (start_bytes, encoding) tuples for encoding detection.
     The first bytes of input data are checked against the start_bytes strings.
     A match indicates the given encoding."""
@@ -384,7 +363,7 @@ class FileInput(Input):
         :Parameters:
             - `source`: either a file-like object (which is read directly), or
               `None` (which implies `sys.stdin` if no `source_path` given).
-            - `source_path`: a path to a file, which is opened and then read.
+            - `source_path`: a path to a file, which is opened for reading.
             - `encoding`: the expected text encoding of the input file.
             - `error_handler`: the encoding error handler to use.
             - `autoclose`: close automatically after read (except when
@@ -400,7 +379,7 @@ class FileInput(Input):
             if source_path:
                 try:
                     self.source = open(source_path, mode,
-                                       encoding=self.encoding or 'utf-8-sig',
+                                       encoding=self.encoding,
                                        errors=self.error_handler)
                 except OSError as error:
                     raise InputError(error.errno, error.strerror, source_path)
@@ -419,32 +398,26 @@ class FileInput(Input):
 
     def read(self):
         """
-        Read and decode a single file and return the data (Unicode string).
+        Read and decode a single file, return as `str`.
         """
         try:
-            if self.source is sys.stdin:
-                # read as binary data to circumvent auto-decoding
+            if not self.encoding and hasattr(self.source, 'buffer'):
+                # read as binary data
                 data = self.source.buffer.read()
+                # decode with heuristics
+                data = self.decode(data)
+                # normalize newlines
+                data = '\n'.join(data.splitlines()+[''])
             else:
                 data = self.source.read()
-        except (UnicodeError, LookupError):
-            if not self.encoding and self.source_path:
-                # re-read in binary mode and decode with heuristics
-                b_source = open(self.source_path, 'rb')
-                data = b_source.read()
-                b_source.close()
-            else:
-                raise
         finally:
             if self.autoclose:
                 self.close()
-        data = self.decode(data)
-        # normalise newlines
-        return '\n'.join(data.splitlines()+[''])
+        return data
 
     def readlines(self):
         """
-        Return lines of a single file as list of Unicode strings.
+        Return lines of a single file as list of strings.
         """
         return self.read().splitlines(True)
 

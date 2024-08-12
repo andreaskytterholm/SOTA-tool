@@ -9,17 +9,19 @@
 import sys; sys.setrecursionlimit(3000)
 
 project = 'SOTA tool'
-copyright = '2024, Andrea Skytterholm and Nektaria Kaloudi'
+copyright = '2024 All Rights Reserved by the NEMECYS Consortium'
 author = 'Andrea Skytterholm and Nektaria Kaloudi'
 release = '1.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = []
+extensions = ['sphinx_design']
 
 templates_path = ['_templates']
 exclude_patterns = []
+
+remove_from_toctrees = []
 
 
 

@@ -1,4 +1,4 @@
-# $Id: de.py 9120 2022-09-13 10:24:30Z milde $
+# $Id: de.py 9428 2023-07-07 06:50:26Z milde $
 # Authors: Engelbert Gruber <grubert@users.sourceforge.net>;
 #          Lea Wiemann <LeWiemann@gmail.com>
 # Copyright: This module has been placed in the public domain.
@@ -17,6 +17,8 @@ __docformat__ = 'reStructuredText'
 
 
 directives = {
+      'warnhinweis': 'admonition',  # or, more generally, 'anmerkung'?
+      'ermahnung': 'admonition',  # sic! kept for backwards compatibiltity
       'achtung': 'attention',
       'vorsicht': 'caution',
       'code': 'code',
@@ -27,8 +29,6 @@ directives = {
       'notiz': 'note',
       'tipp': 'tip',
       'warnung': 'warning',
-      'ermahnung': 'admonition',  # sic! Not used in this sense in rST.
-      # TODO: Rat(schlag), Empfehlung, Warnhinweis, ...?
       'kasten': 'sidebar',
       'seitenkasten': 'sidebar',  # kept for backwards compatibiltity
       'seitenleiste': 'sidebar',

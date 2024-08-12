@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-# :Id: $Id: smartquotes.py 9335 2023-04-06 18:40:57Z milde $
-# :Copyright: © 2010 Günter Milde,
+# :Id: $Id: smartquotes.py 9481 2023-11-19 21:19:20Z milde $
+# :Copyright: © 2010-2023 Günter Milde,
 #             original `SmartyPants`_: © 2003 John Gruber
 #             smartypants.py:          © 2004, 2007 Chad Miller
 # :Maintainer: docutils-develop@lists.sourceforge.net
@@ -142,26 +142,20 @@ SmartyPants can perform the following transformations:
 - Straight quotes ( " and ' ) into "curly" quote characters
 - Backticks-style quotes (\`\`like this'') into "curly" quote characters
 - Dashes (``--`` and ``---``) into en- and em-dash entities
-- Three consecutive dots (``...`` or ``. . .``) into an ellipsis entity
+- Three consecutive dots (``...`` or ``. . .``) into an ellipsis ``…``.
 
 This means you can write, edit, and save your posts using plain old
 ASCII straight quotes, plain dashes, and plain dots, but your published
 posts (and final HTML output) will appear with smart quotes, em-dashes,
 and proper ellipses.
 
-SmartyPants does not modify characters within ``<pre>``, ``<code>``, ``<kbd>``,
-``<math>`` or ``<script>`` tag blocks. Typically, these tags are used to
-display text where smart quotes and other "smart punctuation" would not be
-appropriate, such as source code or example markup.
-
-
 Backslash Escapes
 =================
 
 If you need to use literal straight quotes (or plain hyphens and periods),
 `smartquotes` accepts the following backslash escape sequences to force
-ASCII-punctuation. Mind, that you need two backslashes as Docutils expands it,
-too.
+ASCII-punctuation. Mind, that you need two backslashes in "docstrings", as
+Python expands them, too.
 
 ========  =========
 Escape    Character
@@ -258,6 +252,10 @@ the source::
 
 Version History
 ===============
+
+1.10    2023-11-18
+        - Pre-compile regexps once, not with every call of `educateQuotes()`
+          (patch #206 by Chris Sewell). Simplify regexps.
 
 1.9     2022-03-04
         - Code cleanup. Require Python 3.
@@ -387,10 +385,10 @@ example, ``"1"`` is equivalent to ``"qBde"``.
 class smartchars:
     """Smart quotes and dashes"""
 
-    endash = '–'      # "&#8211;" EN DASH
-    emdash = '—'      # "&#8212;" EM DASH
-    ellipsis = '…'    # "&#8230;" HORIZONTAL ELLIPSIS
-    apostrophe = '’'  # "&#8217;" RIGHT SINGLE QUOTATION MARK
+    endash = '–'      # EN DASH
+    emdash = '—'      # EM DASH
+    ellipsis = '…'    # HORIZONTAL ELLIPSIS
+    apostrophe = '’'  # RIGHT SINGLE QUOTATION MARK
 
     # quote characters (language-specific, set in __init__())
     # https://en.wikipedia.org/wiki/Non-English_usage_of_quotation_marks
@@ -503,6 +501,54 @@ class smartchars:
              self.osquote, self.csquote) = self.quotes[language.lower()]
         except KeyError:
             self.opquote, self.cpquote, self.osquote, self.csquote = '""\'\''
+
+
+class RegularExpressions:
+    # character classes:
+    _CH_CLASSES = {'open': '[([{]',    # opening braces
+                   'close': r'[^\s]',  # everything except whitespace
+                   'punct': r"""[-!"  #\$\%'()*+,.\/:;<=>?\@\[\\\]\^_`{|}~]""",
+                   'dash': r'[-–—]',
+                   'sep': '[\\s\u200B\u200C]',  # Whitespace, ZWSP, ZWNJ
+                   }
+    START_SINGLE = re.compile(r"^'(?=%s\\B)" % _CH_CLASSES['punct'])
+    START_DOUBLE = re.compile(r'^"(?=%s\\B)' % _CH_CLASSES['punct'])
+    ADJACENT_1 = re.compile('"\'(?=\\w)')
+    ADJACENT_2 = re.compile('\'"(?=\\w)')
+    OPEN_SINGLE = re.compile(r"(%(open)s|%(dash)s)'(?=%(punct)s? )"
+                             % _CH_CLASSES)
+    OPEN_DOUBLE = re.compile(r'(%(open)s|%(dash)s)"(?=%(punct)s? )'
+                             % _CH_CLASSES)
+    DECADE = re.compile(r"'(?=\d{2}s)")
+    APOSTROPHE = re.compile(r"(?<=(\w|\d))'(?=\w)")
+    OPENING_SECONDARY = re.compile("""
+                    (# ?<=  # look behind fails: requires fixed-width pattern
+                        %(sep)s     |  # a whitespace char, or
+                        %(open)s    |  # opening brace, or
+                        %(dash)s       # em/en-dash
+                    )
+                    '                  # the quote
+                    (?=\\w|%(punct)s)  # word character or punctuation
+                    """ % _CH_CLASSES, re.VERBOSE)
+    CLOSING_SECONDARY = re.compile(r"(?<!\s)'")
+    OPENING_PRIMARY = re.compile("""
+                    (
+                        %(sep)s     |  # a whitespace char, or
+                        %(open)s    |  # zero width separating char, or
+                        %(dash)s       # em/en-dash
+                    )
+                    "                 # the quote, followed by
+                    (?=\\w|%(punct)s) # a word character or punctuation
+                    """ % _CH_CLASSES, re.VERBOSE)
+    CLOSING_PRIMARY = re.compile(r"""
+                    (
+                    (?<!\s)" | # no whitespace before
+                    "(?=\s)    # whitespace behind
+                    )
+                    """, re.VERBOSE)
+
+
+regexes = RegularExpressions()
 
 
 default_smartypants_attr = '1'
@@ -634,87 +680,52 @@ def educateQuotes(text, language='en'):
     Returns:    The `text`, with "educated" curly quote characters.
 
     Example input:  "Isn't this fun?"
-    Example output: “Isn’t this fun?“;
+    Example output: “Isn’t this fun?“
     """
-
     smart = smartchars(language)
-    ch_classes = {'open': '[([{]',    # opening braces
-                  'close': r'[^\s]',  # everything except whitespace
-                  'punct': r"""[-!" #\$\%'()*+,.\/:;<=>?\@\[\\\]\^_`{|}~]""",
-                  'dash': '[-–—]'     # hyphen and em/en dashes
-                          r'|&[mn]dash;|&\#8211;|&\#8212;|&\#x201[34];',
-                  'sep': '[\\s\u200B\u200C]|&nbsp;',  # Whitespace, ZWSP, ZWNJ
-                  }
+
+    if not re.search('[-"\']', text):
+        return text
 
     # Special case if the very first character is a quote
     # followed by punctuation at a non-word-break. Use closing quotes.
     # TODO: example (when does this match?)
-    text = re.sub(r"^'(?=%s\\B)" % ch_classes['punct'], smart.csquote, text)
-    text = re.sub(r'^"(?=%s\\B)' % ch_classes['punct'], smart.cpquote, text)
+    text = regexes.START_SINGLE.sub(smart.csquote, text)
+    text = regexes.START_DOUBLE.sub(smart.cpquote, text)
 
     # Special case for adjacent quotes
     # like "'Quoted' words in a larger quote."
-    text = re.sub('"\'(?=\\w)', smart.opquote+smart.osquote, text)
-    text = re.sub('\'"(?=\\w)', smart.osquote+smart.opquote, text)
+    text = regexes.ADJACENT_1.sub(smart.opquote+smart.osquote, text)
+    text = regexes.ADJACENT_2.sub(smart.osquote+smart.opquote, text)
 
     # Special case: "opening character" followed by quote,
     # optional punctuation and space like "[", '(', or '-'.
-    text = re.sub(r"(%(open)s|%(dash)s)'(?=%(punct)s? )" % ch_classes,
-                  r'\1%s'%smart.csquote, text)
-    text = re.sub(r'(%(open)s|%(dash)s)"(?=%(punct)s? )' % ch_classes,
-                  r'\1%s'%smart.cpquote, text)
+    text = regexes.OPEN_SINGLE.sub(r'\1%s'%smart.csquote, text)
+    text = regexes.OPEN_DOUBLE.sub(r'\1%s'%smart.cpquote, text)
 
     # Special case for decade abbreviations (the '80s):
     if language.startswith('en'):  # TODO similar cases in other languages?
-        text = re.sub(r"'(?=\d{2}s)", smart.apostrophe, text)
+        text = regexes.DECADE.sub(smart.apostrophe, text)
 
     # Get most opening secondary quotes:
-    opening_secondary_quotes_regex = re.compile("""
-                    (# ?<=  # look behind fails: requires fixed-width pattern
-                      %(sep)s     |  # a whitespace char, or
-                      %(open)s    |  # opening brace, or
-                      %(dash)s       # em/en-dash
-                    )
-                    '                  # the quote
-                    (?=\\w|%(punct)s)  # word character or punctuation
-                    """ % ch_classes, re.VERBOSE)
-
-    text = opening_secondary_quotes_regex.sub(r'\1'+smart.osquote, text)
+    text = regexes.OPENING_SECONDARY.sub(r'\1'+smart.osquote, text)
 
     # In many locales, secondary closing quotes are different from apostrophe:
     if smart.csquote != smart.apostrophe:
-        apostrophe_regex = re.compile(r"(?<=(\w|\d))'(?=\w)")
-        text = apostrophe_regex.sub(smart.apostrophe, text)
+        text = regexes.APOSTROPHE.sub(smart.apostrophe, text)
     # TODO: keep track of quoting level to recognize apostrophe in, e.g.,
     # "Ich fass' es nicht."
 
-    closing_secondary_quotes_regex = re.compile(r"(?<!\s)'")
-    text = closing_secondary_quotes_regex.sub(smart.csquote, text)
+    text = regexes.CLOSING_SECONDARY.sub(smart.csquote, text)
 
     # Any remaining secondary quotes should be opening ones:
     text = text.replace(r"'", smart.osquote)
 
     # Get most opening primary quotes:
-    opening_primary_quotes_regex = re.compile("""
-                    (
-                      %(sep)s     |  # a whitespace char, or
-                      %(open)s    |  # zero width separating char, or
-                      %(dash)s       # em/en-dash
-                    )
-                    "                 # the quote, followed by
-                    (?=\\w|%(punct)s) # a word character or punctuation
-                    """ % ch_classes, re.VERBOSE)
-
-    text = opening_primary_quotes_regex.sub(r'\1'+smart.opquote, text)
+    text = regexes.OPENING_PRIMARY.sub(r'\1'+smart.opquote, text)
 
     # primary closing quotes:
-    closing_primary_quotes_regex = re.compile(r"""
-                    (
-                    (?<!\s)" | # no whitespace before
-                    "(?=\s)    # whitespace behind
-                    )
-                    """, re.VERBOSE)
-    text = closing_primary_quotes_regex.sub(smart.cpquote, text)
+    text = regexes.CLOSING_PRIMARY.sub(smart.cpquote, text)
 
     # Any remaining quotes should be opening ones.
     text = text.replace(r'"', smart.opquote)
@@ -728,7 +739,7 @@ def educateBackticks(text, language='en'):
     Returns:    The `text`, with ``backticks'' -style double quotes
                 translated into HTML curly quote entities.
     Example input:  ``Isn't this fun?''
-    Example output: “Isn't this fun?“;
+    Example output: “Isn't this fun?“
     """
     smart = smartchars(language)
 
@@ -804,7 +815,7 @@ def educateEllipses(text):
                 an ellipsis character.
 
     Example input:  Huh...?
-    Example output: Huh&#8230;?
+    Example output: Huh…?
     """
 
     text = text.replace(r'...', smartchars.ellipsis)

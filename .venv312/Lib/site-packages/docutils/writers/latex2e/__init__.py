@@ -1,4 +1,4 @@
-# $Id: __init__.py 9331 2023-03-25 17:54:40Z aa-turner $
+# $Id: __init__.py 9581 2024-03-17 23:31:04Z milde $
 # Author: Engelbert Gruber, Günter Milde
 # Maintainer: docutils-develop@lists.sourceforge.net
 # Copyright: This module has been placed in the public domain.
@@ -239,6 +239,7 @@ class Writer(writers.Writer):
          ),
         )
 
+    relative_path_settings = ('template',)
     settings_defaults = {'sectnum_depth': 0}  # updated by SectNum transform
     config_section = 'latex2e writer'
     config_section_dependencies = ('writers', 'latex writers')
@@ -273,7 +274,7 @@ class Writer(writers.Writer):
         # get template string from file
         templatepath = Path(self.document.settings.template)
         if not templatepath.exists():
-            templatepath = self.default_template_path / templatepath
+            templatepath = self.default_template_path / templatepath.name
         template = templatepath.read_text(encoding='utf-8')
         # fill template
         self.assemble_parts()  # create dictionary of parts
@@ -904,7 +905,6 @@ class Table:
             return '|'
         return ''
 
-    # horizontal lines are drawn below a row,
     def get_opening(self, width=r'\linewidth'):
         align_map = {'left': '[l]',
                      'center': '[c]',
@@ -1009,6 +1009,11 @@ class Table:
             return 'l'
 
     def get_caption(self):
+        """Deprecated. Will be removed in Docutils 0.22."""
+        warnings.warn('`writers.latex2e.Table.get_caption()` is obsolete'
+                      ' and will be removed in Docutils 0.22.',
+                      DeprecationWarning, stacklevel=2)
+
         if not self.caption:
             return ''
         caption = ''.join(self.caption)
@@ -1185,7 +1190,7 @@ class LaTeXTranslator(nodes.NodeVisitor):
         self.use_latex_toc = settings.use_latex_toc
         self.use_latex_docinfo = settings.use_latex_docinfo
         self.use_latex_citations = settings.use_latex_citations
-        self._reference_label = settings.reference_label
+        self.reference_label = settings.reference_label
         self.hyperlink_color = settings.hyperlink_color
         self.compound_enumerators = settings.compound_enumerators
         self.font_encoding = getattr(settings, 'font_encoding', '')
@@ -1340,7 +1345,7 @@ class LaTeXTranslator(nodes.NodeVisitor):
                            for path in stylesheet_list]
 
         # PDF setup
-        if self.hyperlink_color in ('0', 'false', 'False', ''):
+        if self.hyperlink_color.lower() in ('0', 'false', ''):
             self.hyperref_options = ''
         else:
             self.hyperref_options = ('colorlinks=true,'
@@ -1808,7 +1813,7 @@ class LaTeXTranslator(nodes.NodeVisitor):
         if self.use_latex_citations:
             if not self.inside_citation_reference_label:
                 self.out.append(r'\cite{')
-                self.inside_citation_reference_label = 1
+                self.inside_citation_reference_label = True
             else:
                 assert self.out[-1] in (' ', '\n'),\
                         'unexpected non-whitespace while in reference label'
@@ -1845,6 +1850,8 @@ class LaTeXTranslator(nodes.NodeVisitor):
 
     def depart_classifier(self, node):
         self.out.append('})')
+        if node.next_node(nodes.term, descend=False, siblings=True):
+            self.out.append('\n')
 
     def visit_colspec(self, node):
         self.active_table.visit_colspec(node)
@@ -1906,7 +1913,7 @@ class LaTeXTranslator(nodes.NodeVisitor):
         pass
 
     def depart_definition(self, node):
-        self.out.append('\n')                # TODO: just pass?
+        pass
 
     def visit_definition_list(self, node):
         self.duclass_open(node)
@@ -1920,7 +1927,8 @@ class LaTeXTranslator(nodes.NodeVisitor):
         pass
 
     def depart_definition_list_item(self, node):
-        pass
+        if node.next_node(descend=False, siblings=True) is not None:
+            self.out.append('\n')                # TODO: just pass?
 
     def visit_description(self, node):
         self.out.append(' ')
@@ -2701,7 +2709,7 @@ class LaTeXTranslator(nodes.NodeVisitor):
         pass
 
     def visit_option_group(self, node):
-        self.out.append('\n\\item[')
+        self.out.append('\\item[')
         # flag for first option
         self.context.append(0)
 
@@ -2714,7 +2722,7 @@ class LaTeXTranslator(nodes.NodeVisitor):
             self.fallbacks['_providelength'] = PreambleCmds.providelength
             self.fallbacks['optionlist'] = PreambleCmds.optionlist
         self.duclass_open(node)
-        self.out.append('\\begin{DUoptionlist}')
+        self.out.append('\\begin{DUoptionlist}\n')
 
     def depart_option_list(self, node):
         self.out.append('\\end{DUoptionlist}\n')
@@ -2820,8 +2828,8 @@ class LaTeXTranslator(nodes.NodeVisitor):
             # problematic chars double caret and unbalanced braces:
             if href.find('^^') != -1 or self.has_unbalanced_braces(href):
                 self.error(
-                    'External link "%s" not supported by LaTeX.\n'
-                    ' (Must not contain "^^" or unbalanced braces.)' % href)
+                    f'External link "{href}" not supported by LaTeX.\n'
+                    ' (Must not contain "^^" or unbalanced braces.)')
             if node['refuri'] == node.astext():
                 self.out.append(r'\url{%s}' % href)
                 raise nodes.SkipNode
@@ -2837,9 +2845,10 @@ class LaTeXTranslator(nodes.NodeVisitor):
         if not self.is_inline(node):
             self.out.append('\n')
         self.out.append('\\hyperref[%s]{' % href)
-        if self._reference_label:
+        if self.reference_label:
+            # TODO: don't use \hyperref if self.reference_label is True
             self.out.append('\\%s{%s}}' %
-                            (self._reference_label, href.replace('#', '')))
+                            (self.reference_label, href.replace('#', '')))
             raise nodes.SkipNode
 
     def depart_reference(self, node):
@@ -3006,6 +3015,13 @@ class LaTeXTranslator(nodes.NodeVisitor):
             width = self.to_latex_length(node['width'])
         except KeyError:
             width = r'\linewidth'
+        # Insert hyperlabel and anchor before the table
+        # if it has no caption/title.
+        # See visit_thead() for tables with caption.
+        if not self.active_table.caption:
+            self.out.extend(self.ids_to_labels(
+                node, set_anchor=len(self.table_stack) != 1,
+                newline=True))
         # TODO: Don't use a longtable or add \noindent before
         #       the next paragraph, when in a "compound paragraph".
         #       Start a new line or a new paragraph?
@@ -3017,9 +3033,6 @@ class LaTeXTranslator(nodes.NodeVisitor):
         self.active_table.close()
         if len(self.table_stack) > 0:
             self.active_table = self.table_stack.pop()
-        # Insert hyperlabel after (long)table, as
-        # other places (beginning, caption) result in LaTeX errors.
-        self.out += self.ids_to_labels(node, set_anchor=False, newline=True)
         self.duclass_close(node)
 
     def visit_target(self, node):
@@ -3059,7 +3072,9 @@ class LaTeXTranslator(nodes.NodeVisitor):
         # Do we need a \leavevmode (line break if the field body begins
         # with a list or environment)?
         next_node = node.next_node(descend=False, siblings=True)
-        if not isinstance(next_node, nodes.classifier):
+        if isinstance(next_node, nodes.term):
+            self.out.append('\n')
+        elif not isinstance(next_node, nodes.classifier):
             self.out.append(self.term_postfix(next_node))
 
     def visit_tgroup(self, node):
@@ -3078,7 +3093,14 @@ class LaTeXTranslator(nodes.NodeVisitor):
         if 1 == self.thead_depth():
             self.out.append('{%s}\n' % self.active_table.get_colspecs(node))
             self.active_table.set('preamble written', 1)
-        self.out.append(self.active_table.get_caption())
+        if self.active_table.caption:
+            if self._thead_depth == 1:
+                pre = [r'\caption{']
+                post = self.ids_to_labels(node.parent.parent, False) + [r'}\\']
+            else:
+                pre = [r'\caption[]{']
+                post = [r' (... continued)}\\']
+            self.out.extend(pre + self.active_table.caption + post + ['\n'])
         self.out.extend(self.active_table.visit_thead())
 
     def depart_thead(self, node):

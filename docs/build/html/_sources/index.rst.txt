@@ -3,8 +3,18 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to the knowledgebase repository
-========================================
+
+.. figure:: nemecys_logo.png
+   :align: Right
+   :width: 300px
+
+|
+
+|
+
+
+Common State of the Art Information Repository
+==============================================
 
 ..
    TODO: 
@@ -29,4 +39,12 @@ Welcome to the knowledgebase repository
    * :ref:`genindex`
    * :ref:`modindex`
    * :ref:`search`
+
+
+
+.. figure:: co_funding.jpg
+   :width: 300px
+
+
+The NEMECYS project is co-funded by the European Union, by UK Research and Innovation (UKRI) and by the Swiss State Secretariat for Education, Research and Innovation (SERI).
 

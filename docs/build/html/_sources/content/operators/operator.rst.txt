@@ -1,9 +1,6 @@
 Operators 
 ============
 
-This is a testttt
-
-
 .. toctree::
    :maxdepth: 1
    :caption: Contents:

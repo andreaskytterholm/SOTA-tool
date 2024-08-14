@@ -1,0 +1,2 @@
+Health informatics — Information security management for remote maintenance of medical devices and medical information systems — Part 2: Implementation of an information security management system (ISMS) 
+=============================================================================================================================================================================================================

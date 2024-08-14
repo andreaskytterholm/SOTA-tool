@@ -1,0 +1,2 @@
+Information technology — Security techniques — Code of practice for protection of personally identifiable information (PII) in public clouds acting as PII processors 
+================================================================================================================================================================================

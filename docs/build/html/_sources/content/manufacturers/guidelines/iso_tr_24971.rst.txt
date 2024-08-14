@@ -1,0 +1,13 @@
+Medical devices – Guidance on the application of ISO 14971 
+===========================================================
+
+This Technical Report provides guidance in addressing specific areas of ISO 14971 when implementing risk management. The guidance is intended to assist manufacturers and other users of the standard to: 
+* understand the role of international product safety and process standards in risk management; 
+* develop the policy for determining the criteria for risk acceptability; 
+* incorporate production and post-production feedback loop into risk management; 
+* differentiate between “information for safety” and “disclosure of residual risk”; and 
+* evaluate overall residual risk.
+
+Related documents: ISO 14971: Medical devices — Application of risk management to medical devices 
+
+Fintering tags: Risk management

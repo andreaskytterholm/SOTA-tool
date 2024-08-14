@@ -1,6 +1,9 @@
 Standards
 ============
 
+.. toctree::
+   :maxdepth: 2
+   :glob:
+   :caption: Standards:
 
-* :doc:`standard1`
-* :doc:`standard2`
+   ../../general/standards/*

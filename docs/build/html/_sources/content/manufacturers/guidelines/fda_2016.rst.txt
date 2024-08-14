@@ -1,0 +1,18 @@
+Postmarket Management of Cybersecurity in Medical Devices 
+==========================================================
+
+Postmarket Management of Cybersecurity in Medical Devices is aimed to manufacturers on how to address cybersecurity on the post market stage. The FDA acknowledges that cybersecurity risk management is a shared responsibility among stakeholders.
+
+
+The document is divided into general principles that present premarket and post market considerations along with defining safety and essential performance. Moreover, it focuses on risk management as an ongoing process to identify hazards and assess the risk of patient harm. To assess the exploitability of the cybersecurity vulnerabilities the FDA suggests manufacturers consider using a cybersecurity vulnerability assessment tool and provides examples of the most common ones.
+The guide presents the difference between controlled and uncontrolled risk with examples and recommendations for actions to address the vulnerabilities. It also gives recommended content to include in premarket approval periodic reports and when a manufacturer is an active participant in an Information Sharing Analysis Organisation (ISAO).
+Finally, the FDA recommends the Cybersecurity Framework to become a part of the cybersecurity risk management program for manufacturers and presents the elements necessary to provide an effective post market cybersecurity program:
+* Identify
+* Protect/Detect
+* Protect/Respond/Recover
+* Risk mitigation of safety and essential performance
+
+
+Related documents:
+
+Filtering tags:

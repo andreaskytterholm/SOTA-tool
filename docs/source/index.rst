@@ -30,7 +30,6 @@ Common State of the Art Information Repository
 
    content/manufacturers/manufacturer
    content/operators/operator
-   content/all_content
 
 ..
    Indices and tables

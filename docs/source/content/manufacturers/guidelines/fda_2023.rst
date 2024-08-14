@@ -1,0 +1,8 @@
+Cybersecurity in Medical Devices: Quality System Considerations and Content of Premarket Submissions
+=======================================================================================================
+
+"This document provides FDA’s recommendations to industry regarding cybersecurity device design, labeling, and the documentation that FDA recommends be included in premarket submissions for devices with cybersecurity risk. These recommendations are intended to promote consistency, facilitate efficient premarket review, and help ensure that marketed medical devices are sufficiently resilient to cybersecurity threats. This document supersedes the final guidance “Content of Premarket Submissions for Management of Cybersecurity in Medical Devices,” issued October 2, 2014." - FDA gov
+
+Related documents: 
+
+Filtering tags: 

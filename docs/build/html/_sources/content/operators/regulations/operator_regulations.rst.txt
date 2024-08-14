@@ -10,3 +10,4 @@ This page displays regulations for operators.¨
 
    ../../general/regulations/gdpr
    cybersecurity_enhancement
+   ../../general/regulations/hipaa

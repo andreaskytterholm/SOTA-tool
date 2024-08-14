@@ -1,0 +1,2 @@
+Application of risk management for IT-networks incorporating medical devices - Safety, effectiveness and security in the implementation and use of connected medical devices or connected health software
+====================================================================================================================================================================================================================

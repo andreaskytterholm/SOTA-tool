@@ -1,0 +1,9 @@
+Cybersecurity for Networked Medical Devices Containing Off-the-Shelf (OTS) Software
+=======================================================================================
+
+"A growing number of medical devices are designed to be connected to computer networks. Many of these networked medical devices incorporate off-the-shelf software that is vulnerable to cybersecurity threats such as viruses and worms. These vulnerabilities may represent a risk to the safe and effective operation of networked medical devices and typically require an ongoing maintenance effort throughout the product life cycle to assure an adequate degree of protection. FDA is issuing this guidance to clarify how existing regulations, including the Quality System (QS) Regulation, apply to such cybersecurity maintenance activities." - FDA gov
+
+
+Related documents: 
+
+Filtering tags:

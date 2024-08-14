@@ -1,0 +1,16 @@
+Cybersecurity of medical devices integrating software during their lifecycle
+=============================================================================
+
+Cybersecurity of medical devices integrating software during their lifecycle is a guideline issued by the Agence nationale de sécurité du médicament et des produits de santé (ANSM) that gives an initial general explanation of what MDR  and IVDR stipulate in terms of general requirements and highlights the difference between safety and security. From then on, the document provides specific guidelines on how to apply cybersecurity on medical devices by presenting standards and their application together with examples.
+
+It gives recommendations on five key areas based on the software life cycle:
+* Software design.
+* Medical Device software development.
+* Initialization.
+* Post-market management.
+End of life for the Medical Device software.
+
+
+Related documents: :doc:`../regulations/mdr` and :doc:`../regulations/ivdr`
+
+Filtering tags: Software design, Software development, post-market management, cybersecurity

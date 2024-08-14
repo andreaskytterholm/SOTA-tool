@@ -1,0 +1,13 @@
+Cyber security Requirements for Network-Connected Medical Devices
+====================================================================
+
+Cyber security Requirements for Network-Connected Medical Devices provides manufacturers of medical devices with best practices regarding cyber security requirements. This document refers to the now obsolete Council Directive 93/42/EEC concerning medical devices from 1993 [17] and presents the requirements as questions directed at manufacturers on how to address cybersecurity.
+
+The guide is divided into two. On the one hand it sets out organizational measures regarding product life cycle and communication. The document states that “establishing a secure development life cycle fundamentally improves the security of a product” and for that makes a series of specific questions about cyber security threat and risk analyses, vulnerabilities, security analyses, patches, and updates. It also focuses on the importance of communicating information regarding cybersecurity and safety-incident reporting processes.
+
+On the other hand, the document lists product features regarding cybersecurity recommendations for all operating modes, product configuration and maintenance operations and finally the technical documentation.
+
+
+Related documents: 
+
+Filtering tags:

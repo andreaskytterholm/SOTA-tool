@@ -1,5 +1,5 @@
-Cyber security Requirements for Network-Connected Medical Devices
-====================================================================
+BSI - Cyber security Requirements for Network-Connected Medical Devices
+========================================================================
 
 Cyber security Requirements for Network-Connected Medical Devices provides manufacturers of medical devices with best practices regarding cyber security requirements. This document refers to the now obsolete Council Directive 93/42/EEC concerning medical devices from 1993 [17] and presents the requirements as questions directed at manufacturers on how to address cybersecurity.
 
@@ -7,6 +7,12 @@ The guide is divided into two. On the one hand it sets out organizational measur
 
 On the other hand, the document lists product features regarding cybersecurity recommendations for all operating modes, product configuration and maintenance operations and finally the technical documentation.
 
+
+.. _BSI - Cyber security requirements: https://www.bsi.bund.de/SharedDocs/Downloads/EN/BSI/ICS/Medical_Devices_CS-E_132.pdf?__blob=publicationFile&v=2
+
+The guideline is publicly available here: `BSI - Cyber security requirements`_
+
+Issuer: BSI - Federal Office for Information Security. Germany
 
 Related documents: 
 

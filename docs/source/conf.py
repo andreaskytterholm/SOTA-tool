@@ -8,15 +8,16 @@
 
 import sys; sys.setrecursionlimit(3000)
 
-project = 'SOTA tool'
-copyright = '2024 All Rights Reserved by the NEMECYS Consortium'
+project = 'Cyber compass tool'
+copyright = '2024 All Rights Reserved by the NEMECYS Consortium.'
 author = 'Andrea Skytterholm and Nektaria Kaloudi'
-release = '1.0'
+release = '1.1'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ['sphinx_design']
+extensions = ['sphinx_design',
+              'sphinx_tabs.tabs']
 
 templates_path = ['_templates']
 exclude_patterns = []
@@ -46,8 +47,10 @@ html_css_files = [
     'nemecys_theme.css',
 ]
 
-html_logo = "nemecys_logo.png"
+html_logo = "logo.png"
 html_theme_options = {
     'logo_only': True,
     'display_version': False,
+    'prev_next_buttons_location': None,
 }
+

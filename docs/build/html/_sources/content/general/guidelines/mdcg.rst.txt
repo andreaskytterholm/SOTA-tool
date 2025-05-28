@@ -1,7 +1,10 @@
-MDCG 
-=====
+MDCG 2019-16 - Medical Device Coordination Group: Guidance on Cybersecurity for medical devices  
+================================================================================================
 
 Medical Device Coordination Group (MDCG) issued the Guidance on Cybersecurity for medical devices to help manufacturers meet the requirements of the European Union Regulations on Medical Devices and In Vitro Medical Devices. The document focuses on how to interpret what is stated in the MDR and IVDR regarding cybersecurity with specific examples.
+
+
+Issuer: Medical Device Coordination Group
 
 
 **The key points of this guidance are:**

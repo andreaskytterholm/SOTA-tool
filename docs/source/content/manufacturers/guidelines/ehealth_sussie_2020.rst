@@ -1,3 +1,5 @@
+.. include:: ../../../special.rst
+
 eHealth Sussie - Guide for app developers, manufacturers and distributors
 ==========================================================================
 
@@ -7,6 +9,13 @@ The document states that security needs to be addressed from the design stage pr
 
 This guide also emphasizes that manufacturers have obligations after the software has been developed, such as secure updates, response to security risks and product surveillance system.
 
-Related documents: 
 
-Filtering tags: 
+.. _eHealth Sussie - Guide: https://www.e-health-suisse.ch/upload/documents/Guide_App_Developers.pdf
+
+The guideline is publicly available here: `eHealth Sussie - Guide`_
+
+Issuer: Swiss Competence and Coordination Centre of the Confederation and the Cantons 
+
+
+
+:silver:`Filtering tags: Switzerland, Software, Guideline`

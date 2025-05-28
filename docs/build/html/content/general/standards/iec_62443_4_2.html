@@ -4,11 +4,12 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Security for industrial automation and control systems. Part 4-2: Technical security requirements for IACS components &mdash; SOTA tool 1.0 documentation</title>
+  <title>Security for industrial automation and control systems. Part 4-2: Technical security requirements for IACS components &mdash; Cyber compass tool 1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=a5c4661c" />
       <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/nemecys_theme.css?v=ac96d517" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/nemecys_theme.css?v=c5dcad9d" />
 
   
   <!--[if lt IE 9]>
@@ -17,7 +18,7 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../../../_static/documentation_options.js?v=56dcb7b8"></script>
         <script src="../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
@@ -38,7 +39,7 @@
           
           <a href="../../../index.html">
             
-              <img src="../../../_static/nemecys_logo.png" class="logo" alt="Logo"/>
+              <img src="../../../_static/logo.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -65,12 +66,10 @@
 <li class="toctree-l3"><a class="reference internal" href="iec_80001_1.html">Application of risk management for IT-networks incorporating medical devices - Part 1: Roles, responsibilities and activities</a></li>
 <li class="toctree-l3"><a class="reference internal" href="iec_tr_80001_2_2.html">Application of risk management for IT-networks incorporating medical devices - Part 2-2: Guidance for the disclosure and communication of medical device security needs, risks and controls</a></li>
 <li class="toctree-l3"><a class="reference internal" href="iec_tr_80001_2_8.html">Application of risk management for IT-networks incorporating medical devices – Part 2-8: Application guidance – Guidance on standards for establishing the security capabilities identified in IEC 80001-2-2</a></li>
-<li class="toctree-l3"><a class="reference internal" href="iso_14971.html">Medical devices — Application of risk management to medical devices</a></li>
 <li class="toctree-l3"><a class="reference internal" href="iso_27018.html">Information technology — Security techniques — Code of practice for protection of personally identifiable information (PII) in public clouds acting as PII processors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="iso_27799.html">Health Informatics – Information security management in health</a></li>
 <li class="toctree-l3"><a class="reference internal" href="iso_31000.html">Risk management — Guidelines</a></li>
 <li class="toctree-l3"><a class="reference internal" href="iso_iec_27000.html">Information Technology — Security techniques — Information security management systems (ISMS) — Overview and vocabulary</a></li>
-<li class="toctree-l3"><a class="reference internal" href="iso_iec_27001.html">Information Technology – Security techniques – Information Security management Systems – Requirements</a></li>
 <li class="toctree-l3"><a class="reference internal" href="iso_iec_27005.html">Information Technology - Security Techniques -Information security risk management</a></li>
 <li class="toctree-l3"><a class="reference internal" href="iso_iec_27032.html">Information technology — Security techniques — Guidelines for cybersecurity</a></li>
 <li class="toctree-l3"><a class="reference internal" href="iso_iec_27035_1.html">Information technology – Security techniques – Information security incident management – Part 1: Principles of incident management</a></li>
@@ -96,7 +95,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../index.html">SOTA tool</a>
+          <a href="../../../index.html">Cyber compass tool</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -104,8 +103,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../../manufacturers/manufacturer.html">Manufacturers</a></li>
-          <li class="breadcrumb-item"><a href="../../manufacturers/standards/manufacturer_standards.html">Standards</a></li>
+          <li class="breadcrumb-item"><a href="../../operators/operator.html">Operators</a></li>
+          <li class="breadcrumb-item"><a href="../../operators/standards/operator_standards.html">Standards</a></li>
       <li class="breadcrumb-item active">Security for industrial automation and control systems. Part 4-2: Technical security requirements for IACS components</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../_sources/content/general/standards/iec_62443_4_2.rst.txt" rel="nofollow"> View page source</a>
@@ -123,15 +122,12 @@
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="bs_en_iec_80001.html" class="btn btn-neutral float-left" title="Application of risk management for IT-networks incorporating medical devices - Safety, effectiveness and security in the implementation and use of connected medical devices or connected health software" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="iec_80001_1.html" class="btn btn-neutral float-right" title="Application of risk management for IT-networks incorporating medical devices - Part 1: Roles, responsibilities and activities" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024 All Rights Reserved by the NEMECYS Consortium.</p>
+    <p>&#169; Copyright 2024 All Rights Reserved by the NEMECYS Consortium..</p>
   </div>
 
    

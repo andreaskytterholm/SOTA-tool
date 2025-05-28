@@ -8,9 +8,10 @@ Guidelines
 * :doc:`../../general/guidelines/imdrf_2020`
 * :doc:`bsi_2018`
 * :doc:`health_canada_2019`
-* :doc:`fda_2022`
 * :doc:`fda_2023`
 * :doc:`../../general/guidelines/fda_2005`
 * :doc:`fda_2016`
 * :doc:`tga_australia_2022_industry`
+* :doc:`nist2_csf`
+
 

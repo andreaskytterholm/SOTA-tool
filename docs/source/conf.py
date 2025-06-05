@@ -9,8 +9,8 @@
 import sys; sys.setrecursionlimit(3000)
 
 project = 'Cyber compass tool'
-copyright = '2024 All Rights Reserved by the NEMECYS Consortium.'
-author = 'Andrea Skytterholm and Nektaria Kaloudi'
+copyright = '2025 All Rights Reserved by the NEMECYS Consortium'
+author = 'Andrea Skytterholm'
 release = '1.1'
 
 # -- General configuration ---------------------------------------------------

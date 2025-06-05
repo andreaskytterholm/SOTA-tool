@@ -4,21 +4,30 @@ UK
 
 .. tabs::
 
-   .. tab:: Regulations 
+   .. tab:: Regulations
 
-    * :doc:`../eu/mdr`
-    * :doc:`../eu/gdpr`
-    * :doc:`../eu/cra`
-    * :doc:`nis_regulation_2018`
-    * :doc:`uk_data_protection_act`
+      .. toctree::
+         :maxdepth: 1
+
+         ../eu/mdr
+         ../eu/gdpr
+         ../eu/cra
+         nis_regulation_2018
+         uk_data_protection_act
 
    .. tab:: Standards
 
-    * :doc:`standards/iso_13485_2016`
-    * :doc:`standards/iso_14971`
-    * :doc:`standards/iso_iec_27001`
-    * :doc:`standards/iso_iec_27701`
+      .. toctree::
+         :maxdepth: 1
+
+         standards/iso_13485_2016
+         standards/iso_14971
+         standards/iso_iec_27001
+         standards/iso_iec_27701
 
    .. tab:: Other relevant documents
 
-    * :doc:`../eu/guidelines/mdcg`
+      .. toctree::
+         :maxdepth: 1
+
+         ../eu/guidelines/mdcg

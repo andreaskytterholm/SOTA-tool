@@ -1,0 +1,13 @@
+ISO 13485:2016 *Medical devices — Quality management systems — Requirements for regulatory purposes* 
+=====================================================================================================
+
+
+This standard outlines specific requirements that help organizations ensure their medical devices meet both customer and regulatory demands for safety and efficacy. 
+
+
+
+
+.. admonition:: Info
+
+    * The standard is available for purchase here: https://www.iso.org/standard/59752.html
+    * This page was last updated May 27th 2025

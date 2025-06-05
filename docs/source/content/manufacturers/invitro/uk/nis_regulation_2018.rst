@@ -1,4 +1,4 @@
-The NIS Regulation 2018 (the security of network and information systems regulations (NIS regulations))
+The security of network and information systems regulations (NIS regulations) 2018
 ========================================================================================================
 
 

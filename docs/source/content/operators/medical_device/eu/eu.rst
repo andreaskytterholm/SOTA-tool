@@ -20,3 +20,4 @@ EU
     .. tab:: Other relevant documents
 
         * :doc:`guidelines/mdcg`
+        * :doc:`eu_action_plan`

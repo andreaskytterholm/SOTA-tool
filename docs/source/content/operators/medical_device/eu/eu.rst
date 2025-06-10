@@ -6,18 +6,27 @@ EU
 
     .. tab:: Regulations
 
-        * :doc:`mdr`
-        * :doc:`gdpr`
-        * :doc:`cra`
+        .. toctree::
+            :maxdepth: 1
+
+            mdr
+            gdpr
+            cra
 
     .. tab:: Standards
 
-        * :doc:`standards/iso_13485_2016`
-        * :doc:`standards/iso_14971`
-        * :doc:`standards/iso_iec_27001`
-        * :doc:`standards/iso_iec_27701`
+        .. toctree::
+            :maxdepth: 1
+
+            standards/iso_13485_2016
+            standards/iso_14971
+            standards/iso_iec_27001
+            standards/iso_iec_27701
 
     .. tab:: Other relevant documents
 
-        * :doc:`guidelines/mdcg`
-        * :doc:`eu_action_plan`
+        .. toctree::
+            :maxdepth: 1
+
+            guidelines/mdcg
+            eu_action_plan

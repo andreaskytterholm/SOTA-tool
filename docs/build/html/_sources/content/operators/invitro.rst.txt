@@ -7,5 +7,7 @@ Select your area:
    :maxdepth: 1
 
    invitro/eu/eu
-   invitro/us/us
    invitro/uk/uk
+   invitro/norway/no
+   invitro/us/us
+   

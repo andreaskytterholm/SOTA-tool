@@ -2,7 +2,7 @@ Medical Devices
 ===================
 
 
-Select the area where you plan to market your product: 
+Select the area where you plan to market your device: 
 
 .. toctree::
    :maxdepth: 1

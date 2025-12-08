@@ -2,20 +2,18 @@
 
 ## EU
 
-> ::: {.toctree maxdepth="1"}
-> mdr ../../general/regulations/gdpr
-> ../../general/regulations/cybersecurity_act
-> ../../general/regulations/nis2
-> :::
+- [MDR](../medical_device/eu/mdr.md)
+- [GDPR](../../general/regulations/gdpr.md)
+- [Cybersecurity Act](../../general/regulations/cybersecurity_act.md)
+- [NIS2](../../general/regulations/nis2.md)
 
 ## US
 
-> ::: {.toctree maxdepth="1"}
-> consolidated_appropriations fda hipaa
-> :::
+- [Consolidated Appropriations](consolidated_appropriations.md)
+- [FDA](fda.md)
+- [HIPAA](hipaa.md)
 
 ## UK
 
-> ::: {.toctree maxdepth="1"}
-> uk_data_protection_act nis_regulation_2018
-> :::
+- [UK Data Protection Act](../medical_device/uk/uk_data_protection_act.md)
+- [NIS Regulation 2018](../medical_device/uk/nis_regulation_2018.md)

@@ -20,10 +20,8 @@ technical and organisational measures in place regarding information
 security and data protection for its processing of personal health
 data.\" - NORMEN
 
-::: admonition
-Info
+!!! info "Info"
 
--   The Code of conduct is publicly available here:
-    <https://www.helsedirektoratet.no/english/the-code-of-conduct-for-information-security-and-data-protection/Code%20of%20conduct%20for%20information%20security%20and%20data%20protection%20in%20the%20Health%20Care%20Sector.pdf>
--   This page was last updated June 10th 2025
-:::
+    -   The Code of conduct is publicly available here:
+        <https://www.helsedirektoratet.no/english/the-code-of-conduct-for-information-security-and-data-protection/Code%20of%20conduct%20for%20information%20security%20and%20data%20protection%20in%20the%20Health%20Care%20Sector.pdf>
+    -   This page was last updated June 10th 2025

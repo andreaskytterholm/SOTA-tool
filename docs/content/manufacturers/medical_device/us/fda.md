@@ -8,10 +8,8 @@ products are safe, effective, and accurately labeled. Over the years, it
 has been amended to address new scientific and technological
 developments.
 
-::: admonition
-Info
+!!! info "Info"
 
--   The regulation is publicly available here:
-    <https://www.fda.gov/regulatory-information/laws-enforced-fda/federal-food-drug-and-cosmetic-act-fdc-act>
--   This page was last updated May 27th 2025
-:::
+    -   The regulation is publicly available here:
+        <https://www.fda.gov/regulatory-information/laws-enforced-fda/federal-food-drug-and-cosmetic-act-fdc-act>
+    -   This page was last updated May 27th 2025

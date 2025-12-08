@@ -8,22 +8,18 @@ devices are safe to use and perform as intended. This regulation sets
 specific requirements for products that are to be placed on the European
 market, ensuring they meet high standards of quality and reliability.
 
-::: admonition
-Info
+!!! info "Info"
 
--   The regulation is publicly available here:
-    <https://eur-lex.europa.eu/eli/reg/2017/746/oj/eng>
--   This page was last updated May 27th 2025
-:::
+    -   The regulation is publicly available here:
+        <https://eur-lex.europa.eu/eli/reg/2017/746/oj/eng>
+    -   This page was last updated May 27th 2025
 
-::: admonition
-Related documents
+!!! note "Related documents"
 
--   `guidelines/mdcg`{.interpreted-text role="doc"}
-:::
+    -   [MDCG 2019-16 *Medical Device Coordination Group: Guidance on Cybersecurity for medical devices*](guidelines/mdcg.md)
 
 | 
 
 | 
 
-[Filtering tags: IVDR, EU]{.silver}
+**Filtering tags**: IVDR, EU

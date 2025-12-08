@@ -20,4 +20,4 @@ Guide](https://www.e-health-suisse.ch/upload/documents/Guide_App_Developers.pdf)
 Issuer: Swiss Competence and Coordination Centre of the Confederation
 and the Cantons
 
-[Filtering tags: Switzerland, Software, Guideline]{.silver}
+**Filtering tags**: Switzerland, Software, Guideline

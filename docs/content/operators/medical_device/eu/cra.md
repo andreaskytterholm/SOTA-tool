@@ -4,10 +4,8 @@ It is setting out horizontal cybersecurity requirements for products
 with digital elements. It is also known as the Cyber Resilience Act
 (CRA).
 
-::: admonition
-Info
+!!! info "Info"
 
--   The regulation is publicly available here:
-    <https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng>
--   This page was last updated May 27th 2025
-:::
+    -   The regulation is publicly available here:
+        <https://eur-lex.europa.eu/eli/reg/2024/2847/oj/eng>
+    -   This page was last updated May 27th 2025

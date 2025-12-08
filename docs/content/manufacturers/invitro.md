@@ -2,6 +2,8 @@
 
 Select the area where you plan to market your device:
 
-::: {.toctree maxdepth="1"}
-invitro/eu/eu invitro/uk/uk invitro/norway/no invitro/us/us
-:::
+- [EU](invitro/eu/eu.md)
+- [UK](invitro/uk/uk.md)
+- [Norway](invitro/norway/no.md)
+- [US](invitro/us/us.md)
+

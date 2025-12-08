@@ -47,9 +47,7 @@ security mechanisms and practices during the design phase of medical
 devices. These challenges are standing in the way of getting the
 products out on the market quickly.
 
-::: admonition
-Info
+!!! info "Info"
 
--   You can find more information about the NEMECYS project on the
-    project website: <https://nemecys.eu/>
-:::
+    -   You can find more information about the NEMECYS project on the
+        project website: <https://nemecys.eu/>

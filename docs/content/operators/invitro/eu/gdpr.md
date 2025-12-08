@@ -12,12 +12,10 @@ access, accidental loss, unauthorized destruction, or alteration of
 personal data. The GDPR encourages organizations to consider the state
 of the art when implementing security measures.
 
-::: admonition
-Info
+!!! info "Info"
 
--   The regulation is publicly available here:
-    <https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng>
--   This page was last updated May 27th 2025
-:::
+    -   The regulation is publicly available here:
+        <https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng>
+    -   This page was last updated May 27th 2025
 
 Filtering tags: privacy, data protection

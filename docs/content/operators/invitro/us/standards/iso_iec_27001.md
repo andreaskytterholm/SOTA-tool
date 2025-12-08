@@ -5,10 +5,8 @@ security risks, which can be applied to medical devices. It covers risk
 assessment, information classification, asset management, and incident
 response --- all critical aspects of cybersecurity in medical devices.
 
-::: admonition
-Info
+!!! info "Info"
 
--   The standard is available for purchase here:
-    <https://www.iso.org/standard/27001>
--   This page was last updated May 27th 2025
-:::
+    -   The standard is available for purchase here:
+        <https://www.iso.org/standard/27001>
+    -   This page was last updated May 27th 2025

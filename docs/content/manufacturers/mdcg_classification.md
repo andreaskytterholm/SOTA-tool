@@ -15,10 +15,8 @@ correspond, to a large extent, to the classification rules established
 by the International Medical Device Regulators Forum (IMDRF) in the
 guidance document GHTF/SG1/N77:2012.\" - MDCG 2021-24
 
-::: admonition
-Info
+!!! info "Info"
 
--   The guidance is publicly available here:
-    <https://health.ec.europa.eu/latest-updates/mdcg-2021-24-guidance-classification-medical-devices-2021-10-04_en>
--   This page was last updated June 12th 2025
-:::
+    -   The guidance is publicly available here:
+        <https://health.ec.europa.eu/latest-updates/mdcg-2021-24-guidance-classification-medical-devices-2021-10-04_en>
+    -   This page was last updated June 12th 2025

@@ -8,10 +8,8 @@ consistency, facilitate efficient premarket review, and help ensure that
 marketed medical devices are sufficiently resilient to cybersecurity
 threats.
 
-::: admonition
-Info
+!!! info "Info"
 
--   The guidance is publicly available here:
-    <https://www.fda.gov/regulatory-information/search-fda-guidance-documents/cybersecurity-medical-devices-quality-system-considerations-and-content-premarket-submissions>
--   This page was last updated June 5th 2025
-:::
+    -   The guidance is publicly available here:
+        <https://www.fda.gov/regulatory-information/search-fda-guidance-documents/cybersecurity-medical-devices-quality-system-considerations-and-content-premarket-submissions>
+    -   This page was last updated June 5th 2025

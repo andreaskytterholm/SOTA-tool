@@ -30,10 +30,8 @@ Therefore, the classification of a device directly determines whether
 the 510(k) pathway is applicable and what kind of evidence is needed to
 bring the device to market.
 
-::: admonition
-Info
+!!! info "Info"
 
--   The overview is publicly available here:
-    <https://www.fda.gov/regulatory-information/search-fda-guidance-documents/510k-program-evaluating-substantial-equivalence-premarket-notifications-510k>
--   This page was last updated June 12th 2025
-:::
+    -   The overview is publicly available here:
+        <https://www.fda.gov/regulatory-information/search-fda-guidance-documents/510k-program-evaluating-substantial-equivalence-premarket-notifications-510k>
+    -   This page was last updated June 12th 2025

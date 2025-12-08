@@ -8,20 +8,13 @@ before it can be marketed and used in healthcare settings.
 Classification helps manufacturers understand the regulatory pathway
 early in the development process.
 
-::::::: tabs
-:::: tab
-EU
+=== "EU"
 
-::: {.toctree maxdepth="1"}
-mdcg_classification
-:::
-::::
+    - [MDCG 2021-24 *Guidance on classification of medical devices*](mdcg_classification.md)
 
-:::: tab
-US
 
-::: {.toctree maxdepth="1"}
-fda_classification 510_program_premarket_not
-:::
-::::
-:::::::
+=== "US"
+
+    - [Medical device classification - FDA overview](fda_classification.md)
+    - [The 510(k) Program: Evaluating Substantial Equivalence in Premarket Notifications \[510(k)\] *Guidance for Industry and Food and Drug Administration Staff*](510_program_premarket_not.md)
+

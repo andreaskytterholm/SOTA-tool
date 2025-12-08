@@ -2,7 +2,8 @@
 
 Select the area where you plan to market your device:
 
-::: {.toctree maxdepth="1"}
-medical_device/eu/eu medical_device/uk/uk medical_device/norway/no
-medical_device/us/us
-:::
+- [EU](medical_device/eu/eu.md)
+- [UK](medical_device/uk/uk.md)
+- [Norway](medical_device/norway/no.md)
+- [US](medical_device/us/us.md)
+

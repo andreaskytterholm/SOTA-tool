@@ -2,6 +2,6 @@
 
 Select the type of device you are assessing:
 
-::: {.toctree maxdepth="1"}
-invitro medical_device
-:::
+- [In Vitro Medical Devices](invitro.md)
+- [Medical Devices](medical_device.md)
+

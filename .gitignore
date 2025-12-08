@@ -1,1 +1,4 @@
 docs/build/*
+site/
+.venv/
+docs_legacy

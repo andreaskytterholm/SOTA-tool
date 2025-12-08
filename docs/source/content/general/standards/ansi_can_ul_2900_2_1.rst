@@ -1,2 +1,0 @@
-Software Cybersecurity for Network-Connectable Products, Part 2-1: Particular Requirements for Network Connectable Components of Healthcare and Wellness Systems 
-=================================================================================================================================================================

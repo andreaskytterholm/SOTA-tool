@@ -28,5 +28,3 @@ procurement, and to raise security awareness through cybersecurity
 training.
 
 Related documents:
-
-Filtering tags:

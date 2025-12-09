@@ -1,3 +1,9 @@
+---
+tags:
+  - Data protection
+  - privacy
+---
+
 # Medical Device Regulation (MDR) *Regulation (EU) 2017/745 on medical devices*
 
 The EU 2017/745 MDR provide a framework to ensure the safety and
@@ -218,4 +224,3 @@ security measures, including protection against unauthorized access.
 [Spyde
 risk](https://spyderisk.org/documentation/modeller/latest/Reference%20Guide/)
 
-Filtering tags: Data protection, privacy

@@ -1,6 +1,4 @@
-<figure class="align-Right">
-<img src="../nemecys_logo.png" width="300" alt="../nemecys_logo.png" />
-</figure>
+![NEMECYS Logo](../nemecys_logo.png){ align=right width=300 }
 
 # About
 

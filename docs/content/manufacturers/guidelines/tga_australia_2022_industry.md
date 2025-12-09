@@ -29,5 +29,3 @@ manufacturers that they must demonstrate information gathering on
 cybersecurity vulnerabilities.
 
 Related documents:
-
-Filtering tags:

@@ -1,3 +1,10 @@
+---
+tags:
+  - US
+  - Operator
+  - Cybersecurity
+---
+
 # Cybersecurity Enhancement Act
 
 The Cybersecurity Enhancement Act of 2014 is a United States Public Law
@@ -11,4 +18,3 @@ different agencies within the US, a national cybersecurity awareness and
 education program as well as the development of international technical
 standards related to information system security.
 
-Filtering tags: US, Operator, Cybersecurity

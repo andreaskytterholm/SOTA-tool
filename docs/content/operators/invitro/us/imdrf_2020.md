@@ -1,3 +1,9 @@
+---
+tags:
+  - cybersecurity
+  - patient safety
+---
+
 # International Medical Device Regulators Forum (IMDRF) *Principles and Practices for Medical Device Cybersecurity*
 
 Principles and Practices for Medical Devices. International Medical
@@ -109,4 +115,3 @@ vulnerability disclosure procedures.
 
 === "Reliability and Availability"
 
-Filtering tags: cybersecurity, patient safety

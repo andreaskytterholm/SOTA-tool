@@ -1,3 +1,9 @@
+---
+tags:
+  - US
+  - Manufacturer
+---
+
 # Consolidated Appropriations Act
 
 Ensuring Cybersecurity of Medical Devices of the Consolidated
@@ -8,4 +14,3 @@ the device is secure, supply patches and updates for cybersecurity
 threats, and to comply with the requirements set by the FDA through
 regulation.
 
-Filtering tags: US, Manufacturer

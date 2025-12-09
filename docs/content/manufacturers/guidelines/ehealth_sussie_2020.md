@@ -1,3 +1,10 @@
+---
+tags:
+  - Switzerland
+  - Software
+  - Guideline
+---
+
 # eHealth Sussie - Guide for app developers, manufacturers and distributors
 
 The Guide for app developers, manufacturers and distributors issued by
@@ -20,4 +27,3 @@ Guide](https://www.e-health-suisse.ch/upload/documents/Guide_App_Developers.pdf)
 Issuer: Swiss Competence and Coordination Centre of the Confederation
 and the Cantons
 
-**Filtering tags**: Switzerland, Software, Guideline

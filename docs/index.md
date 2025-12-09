@@ -1,6 +1,4 @@
-<figure class="align-Right">
-<img src="nemecys_logo.png" width="300" alt="nemecys_logo.png" />
-</figure>
+![nemecys_logo.png](nemecys_logo.png){ align=right width=300 }
 
 # Welcome to the Cyber Compass
 
